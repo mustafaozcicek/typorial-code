@@ -1,5 +1,5 @@
 {
-  "idleAfterSeconds": 2,
+  "idleAfterSeconds": 30,
   "typeIntervalMs": 120,
   "eraseIntervalMs": 45,
   "holdSeconds": 5,
