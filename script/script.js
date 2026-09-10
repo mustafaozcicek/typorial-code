@@ -1900,7 +1900,8 @@
             const space = document.createElement("div");
             space.className = "space-token";
             space.setAttribute("aria-hidden", "true");
-            space.style.flex = `0 0 ${9 * scale * wordSpace * token.size}px`;
+            // Explicit width includes spaces in Safari's nested flex sizing.
+            space.style.width = `${9 * scale * wordSpace * token.size}px`;
 
             const previousItem = container.lastElementChild;
             if (
