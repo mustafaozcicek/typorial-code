@@ -354,19 +354,6 @@
   }
 }
 
-      .idle-config {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px 16px;
-        border-top: 1px solid var(--line);
-        padding-top: 12px;
-        font-size: 12px;
-      }
-      .idle-config label { margin: 0; }
-      .idle-config input { max-width: 100%; font: inherit; }
-      #idleSamplesStatus { color: var(--muted); }
       .idle-playing .canvas-caret {
         opacity: 1;
         animation: caret-blink 1s steps(1, end) infinite;

@@ -2294,54 +2294,14 @@
           app.classList.toggle("idle-playing", active);
         },
       });
-      const idleStatus = document.getElementById("idleSamplesStatus");
-      const idleFile = document.getElementById("idleSamplesFile");
-      let idleConfigVersion = 0;
-      idleFile.addEventListener("change", async () => {
-        const file = idleFile.files[0];
-        if (!file) return;
-        const version = ++idleConfigVersion;
-        try {
-          const config = JSON.parse(await file.text());
-          if (version !== idleConfigVersion) return;
-          idlePlayback.configure(config);
-          // Preserve the exhibition phrase file across automatic reloads.
-          if (location.protocol === "file:") {
-            try { sessionStorage.setItem("typorial-idle-config", JSON.stringify(config)); } catch {}
-          }
-          idleStatus.textContent = `Loaded ${config.phrases.length} phrases from ${file.name}.`;
-        } catch (error) {
-          if (version !== idleConfigVersion) return;
-          idleStatus.textContent = `Could not load that JSON. ${error.message} Current phrases are unchanged.`;
-        }
-        idleFile.value = "";
-      });
-      if (location.protocol === "file:") {
-        idleStatus.textContent = "Built-in samples ready. Choose your edited idle-samples.json to use it.";
-        try {
-          const saved = sessionStorage.getItem("typorial-idle-config");
-          if (saved) {
-            const config = JSON.parse(saved);
-            idlePlayback.configure(config);
-            idleStatus.textContent = `Restored ${config.phrases.length} phrases from your loaded JSON.`;
-          }
-        } catch {
-          idleStatus.textContent = "Built-in samples ready. Reload your JSON if browser storage is unavailable.";
-        }
-      } else {
-        const version = idleConfigVersion;
+      if (location.protocol !== "file:") {
         fetch("idle-samples.json", { cache: "no-store" })
           .then(response => {
             if (!response.ok) throw new Error("Could not load idle-samples.json.");
             return response.json();
           })
-          .then(config => {
-            if (version !== idleConfigVersion) return;
-            idlePlayback.configure(config);
-            idleStatus.textContent = `Loaded ${config.phrases.length} phrases from idle-samples.json.`;
-          })
+          .then(config => idlePlayback.configure(config))
           .catch(() => {
-            if (version !== idleConfigVersion) return;
-            idleStatus.textContent = "Using built-in samples. Choose a valid idle-samples.json to load your phrases.";
+            // Keep the built-in samples if the configuration cannot be loaded.
           });
       }
