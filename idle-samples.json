@@ -1,0 +1,49 @@
+{
+  "idleAfterSeconds": 2,
+  "typeIntervalMs": 120,
+  "eraseIntervalMs": 45,
+  "holdSeconds": 5,
+  "betweenPhrasesSeconds": 1,
+  "phrases": [
+    {
+      "text": "HELLO WORLD!",
+      "scale": 25,
+      "glyphStyle": 1
+    },
+    {
+      "text": "When does a shape become a letter?",
+      "scale": 8,
+      "glyphStyle": 2
+    },
+    {
+      "text": "Once upon a time in Mount Pleasant.",
+      "scale": 13,
+      "glyphStyle": 1
+    },
+    {
+      "text": "A Aa B Bb C Cc D Dd E Ee F Ff G Gg H Hh I Ii J Jj K Kk L Ll M Mm N Nn O Oo P Pp Q Qq R Rr S Ss T Tt U Uu V Vv W Ww X Xx Y Yy Z Zz  ",
+      "scale": 5,
+      "glyphStyle": 1
+    },
+    {
+      "text": "1 11 2 22 3 33 4 44 5 55 6 66 7 77 8 88 9 99 0 00",
+      "scale": 10,
+      "glyphStyle": 2
+    },
+    {
+      "text": "Hello, stranger",
+      "scale": 20,
+      "glyphStyle": 1
+    },
+    {
+      "text": "LOOK AGAIN",
+      "scale": 25,
+      "glyphStyle": 2
+    },
+    {
+      "text": "Please interrupt me!",
+      "scale": 15,
+      "glyphStyle": 1
+    }
+  ]
+}

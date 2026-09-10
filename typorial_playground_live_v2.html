@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Typorial Playground</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div class="app controls-collapsed">
+      <main class="stage" aria-label="Typorial typing canvas">
+        <div id="words" class="words"></div>
+        <textarea
+          id="keyboardCapture"
+          class="keyboard-capture"
+          aria-label="Type on the Typorial canvas"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+        ></textarea>
+      </main>
+
+      <div class="controls-dock">
+        <header class="controls-header">
+          <h1>Typorial Playground</h1>
+      <button
+        id="controlsToggle"
+        class="controls-toggle"
+        type="button"
+        aria-controls="controls"
+        aria-expanded="false"
+        aria-label="Show controls"
+        title="Show controls"
+      >
+        <svg class="settings-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9.5 3-.5 2.1-1.8 1-2.1-.6-2.5 4.3 1.6 1.5v2.1l-1.6 1.4 2.5 4.3 2.1-.6 1.8 1 .5 2.5h5l.5-2.5 1.8-1 2.1.6 2.5-4.3-1.6-1.4v-2.1l1.6-1.5-2.5-4.3-2.1.6-1.8-1-.5-2.1Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <svg class="close-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+        </header>
+      <aside id="controls" class="controls">
+        <div class="control-group">
+        <label for="themeMode">Appearance</label>
+        <select id="themeMode">
+          <option value="dark" selected>Dark</option>
+          <option value="light">Light</option>
+        </select>
+        </div>
+
+        <div class="control-group">
+        <label for="glyphDesign">Glyph design</label>
+        <select id="glyphDesign">
+          <option value="rounded" selected>Rounded serif</option>
+          <option value="geometric">Geometric</option>
+        </select>
+        </div>
+
+        <div class="control-group">
+        <label for="scale">Scale</label>
+        <div class="row">
+          <input id="scale" type="range" min="2" max="12" step="1" value="2" />
+          <span class="value"><span id="scaleVal">2</span> px</span>
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label for="wordSpace">Word spacing</label>
+        <div class="row">
+          <input
+            id="wordSpace"
+            type="range"
+            min="0"
+            max="2"
+            step="0.1"
+            value="0.5"
+          />
+          <span class="value"><span id="wordSpaceVal">0.5</span> cells</span>
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label for="lineHeight">Line height</label>
+        <div class="row">
+          <input
+            id="lineHeight"
+            type="range"
+            min="1"
+            max="3"
+            step="0.1"
+            value="1.1"
+          />
+          <span class="value"><span id="lineHeightVal">1.0</span>×</span>
+        </div>
+        </div>
+
+        <fieldset class="logic-options">
+          <legend>Typesetting path</legend>
+          <div class="logic-grid">
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="spiral-expanded" checked aria-label="Large-start spiral" />
+              <code class="logic-matrix">123<br />163<br />154</code>
+            </label>
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="spiral-lower" aria-label="Spiral ↑" />
+              <code class="logic-matrix">345<br />296<br />187</code>
+            </label>
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="snake-lower" aria-label="Snake ↑" />
+              <code class="logic-matrix">349<br />258<br />167</code>
+            </label>
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="spiral-upper" aria-label="Spiral ↓" />
+              <code class="logic-matrix">187<br />296<br />345</code>
+            </label>
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="snake-upper" aria-label="Columns ↓↓↑" />
+              <code class="logic-matrix">149<br />258<br />367</code>
+            </label>
+            <label class="logic-option">
+              <input type="radio" name="typesettingLogic" value="latin-flow" aria-label="Latin flow" />
+              <code class="logic-matrix">123<br />145<br />675</code>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="display-options">
+        <label class="row toggle-option"><input id="showCells" type="checkbox" /><span>Show cell boundaries</span></label>
+
+        <label class="row toggle-option"><input id="showPixels" type="checkbox" /><span>Show pixel grid</span></label>
+
+        <label class="row toggle-option"><input id="showNumbers" type="checkbox" /><span>Show placement numbers</span></label>
+
+        <label class="row toggle-option"><input id="preserveLineBreaks" type="checkbox" /><span>Preserve line breaks</span></label>
+
+        <label class="row toggle-option"><input id="showLabels" type="checkbox"/><span>Show standard wording</span></label>
+
+        <label class="row toggle-option"><input id="apostropheMarker" type="checkbox" checked /><span>Experimental apostrophe marker</span></label>
+        </div>
+        <div class="idle-config">
+          <label for="idleSamplesFile">Idle phrases · JSON</label>
+          <input id="idleSamplesFile" type="file" accept=".json,application/json" aria-describedby="idleSamplesStatus" />
+          <span id="idleSamplesStatus" role="status"></span>
+        </div>
+      </aside>
+
+
+
+      </div>
+    </div>
+
+    <script src="script/glyphs.generated.js"></script>
+    <script>
+      window.TYPORIAL_GLYPH_SETS = { rounded: window.TYPORIAL_GLYPHS };
+    </script>
+    <script src="script/glyphs2.generated.js"></script>
+    <script>
+      window.TYPORIAL_GLYPH_SETS.geometric = window.TYPORIAL_GLYPHS;
+      window.TYPORIAL_GLYPHS = window.TYPORIAL_GLYPH_SETS.rounded;
+    </script>
+    <script src="script/idle.js"></script>
+    <script src="script/script.js"></script>
+  </body>
+</html>
